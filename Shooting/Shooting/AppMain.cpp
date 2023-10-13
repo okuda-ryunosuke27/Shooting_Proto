@@ -4,6 +4,7 @@
 #include "InputControl.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "FreamControl.h"
 
 
 #define SCREEN_HEIGHT (480)		//スクリーンサイズ(高さ)
@@ -27,6 +28,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		return D_ERROR;
 	}
 
+	//フレームレートの初期化
+	FreamControl_Initialize();
 	//プレイヤーの初期化
 	Player_Initialize();
 
@@ -56,8 +59,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		Enemy_Draw();
 
 
-		//20ミリ秒待機(疑似60FPS)
-		WaitTimer(20);
+		FreamControl_Update();
 
 		//画面の内容を表画面に反映
 		ScreenFlip();
