@@ -1,6 +1,7 @@
 #include "Bullet.h"
 #include "DxLib.h"
 #include "Enemy.h"
+#include "FreamControl.h"
 
 
 //ストレートに進む弾と
@@ -12,6 +13,8 @@
 float BulletX = -10.0f, BulletY = -10.0f, BulletR = 10.0f; 
 int IsBulletFlag = 0;
 float verX = 0.0f, verY = 0.0f;
+float BulletSpX = 0.0f, BulletSpY = 0.0f;
+
 
 void Bullet_Initialize(float& PlayerX, float& PlayerY)
 {
@@ -46,11 +49,22 @@ void Bullet_Homing()
 	if (IsBulletFlag == 1)
 	{
 		//ベクトルの計算、Xの座標
-		verX = GetEnemyX() - BulletX;
+		verX = GetEnemyX() + BulletX;
 
 		//ベクトルの計算、Yの座標
-		verY = GetEnemyY() - BulletY;
+		verY = GetEnemyY() + BulletY;
 
+		BulletSpX = verX / GetFreamTime();
+		BulletSpY = verY / GetFreamTime();
+		
+		BulletY -= BulletSpY;
+
+		if (BulletY < -20)
+		{
+			BulletX = 0;
+			BulletY = 0;
+			IsBulletFlag = 0;
+		}
 		/*if (BulletY > GetEnemyY())
 		{
 			BulletY -= 5.5;
@@ -70,4 +84,7 @@ void Bullet_Homing()
 void Bullet_Draw(void)
 {
 	DrawCircleAA(BulletX, BulletY, BulletR, 15, 0xFFFFFF, TRUE);
+
+	DrawFormatString(0, 400, 0xffffff, "%.2f", BulletX);
+	DrawFormatString(70, 400, 0xffffff, "%.2f", BulletY);
 }

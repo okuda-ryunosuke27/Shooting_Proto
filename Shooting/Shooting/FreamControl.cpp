@@ -8,6 +8,7 @@ int FreamTime;
 int NowTime;
 int Wait;
 int LastTime;
+float FreamRate;
 
 /****************************
 フレーム制御機能：初期化処理
@@ -37,4 +38,14 @@ void FreamControl_Update(void)
 		WaitTimer(Wait);
 	}
 	LastTime = GetNowCount();
+}
+
+/****************************
+フレーム制御機能：フレームレートを取得する
+引　数：なし
+戻り値：フレームタイム
+****************************/
+int GetFreamTime(void)
+{
+	return Wait / 60;
 }
