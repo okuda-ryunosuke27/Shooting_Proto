@@ -49,10 +49,10 @@ void Bullet_Homing()
 	if (IsBulletFlag == 1)
 	{
 		//ベクトルの計算、Xの座標
-		verX = GetEnemyX() + BulletX;
+		verX = GetEnemyX() - BulletX;
 
 		//ベクトルの計算、Yの座標
-		verY = GetEnemyY() + BulletY;
+		verY = GetEnemyY() - BulletY;
 
 		BulletSpX = verX / GetFreamTime();
 		BulletSpY = verY / GetFreamTime();
