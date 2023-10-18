@@ -57,7 +57,7 @@ void Bullet_Homing()
 		BulletSpX = verX / GetFreamTime();
 		BulletSpY = verY / GetFreamTime();
 		
-		BulletY -= BulletSpY;
+		BulletY -= -BulletSpY;
 
 		if (BulletY < -20)
 		{

@@ -47,5 +47,5 @@ void FreamControl_Update(void)
 ****************************/
 int GetFreamTime(void)
 {
-	return NowTime - LastTime;
+	return (float)NowTime - (float)LastTime;
 }

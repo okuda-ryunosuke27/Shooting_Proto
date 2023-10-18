@@ -36,6 +36,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//ゲームループ
 	while (ProcessMessage()!=D_ERROR && Input_Escape() == FALSE)
 	{
+		//フレーム制御機能更新処理
+		FreamControl_Update();
 		//入力の更新処理
 		Input_Updata();
 
@@ -59,7 +61,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		Enemy_Draw();
 
 
-		FreamControl_Update();
+		
 
 		//画面の内容を表画面に反映
 		ScreenFlip();
