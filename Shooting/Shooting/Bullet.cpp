@@ -41,43 +41,34 @@ void Bullet_Updata(void)
 
 void Bullet_Homing()
 {
-	//敵が移動しないベクトルの計算をする。
-	//ベクトルの計算をする
-	//二点間の距離のX、Yを計算して
-	//計算したX、Yを1フレームごとに割って
-	//それを移動量にする。
+	//弾を発射するプログラム
 	if (IsBulletFlag == 1)
 	{
-		//ベクトルの計算、Xの座標
-		verX = GetEnemyX() - BulletX;
-
-		//ベクトルの計算、Yの座標
-		verY = GetEnemyY() - BulletY;
-
+		if (BulletY > 30)
+		{
+			//ベクトルの計算、Xの座標
+			verX = GetEnemyX() - BulletX;
+			//ベクトルの計算、Yの座標
+			verY = GetEnemyY() - BulletY;
+		}
 		BulletSpX = verX / GetFreamTime();
 		BulletSpY = verY / GetFreamTime();
-		
-		BulletY -= -BulletSpY;
+		if (BulletY > 320)
+		{
+			BulletY -= 1.5f;
+		}
+		else 
+		{
+			BulletX -= -BulletSpX;
+			BulletY -= -BulletSpY;
+		}
 
 		if (BulletY < -20)
 		{
-			BulletX = 0;
-			BulletY = 0;
+			BulletX = -10.f;
+			BulletY = -10.f;
 			IsBulletFlag = 0;
 		}
-		/*if (BulletY > GetEnemyY())
-		{
-			BulletY -= 5.5;
-
-			if (BulletY < GetEnemyY())
-			{
-				IsBulletFlag = 0;
-			}
-		}
-		if (BulletX < GetEnemyX())
-		{
-			BulletX += 2.5;
-		}*/
 	}
 }
 
@@ -87,4 +78,5 @@ void Bullet_Draw(void)
 
 	DrawFormatString(0, 400, 0xffffff, "%.2f", BulletX);
 	DrawFormatString(70, 400, 0xffffff, "%.2f", BulletY);
+	DrawFormatString(140, 400, 0xffffff, "%.2f", GetFreamTime());
 }

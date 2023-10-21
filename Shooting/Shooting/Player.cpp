@@ -21,11 +21,11 @@ void Player_Updata(void)
 	//プレイヤーの移動処理
 	if (key()[KEY_INPUT_A] == 1)
 	{
-		PlayerX -= 4.5;
+		PlayerX -= 4.5f;
 	}
 	if (key()[KEY_INPUT_D] == 1)
 	{
-		PlayerX += 4.5;
+		PlayerX += 4.5f;
 	}
 
 	//プレイヤーの弾打つ処理

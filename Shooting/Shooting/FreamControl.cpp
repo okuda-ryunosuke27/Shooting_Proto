@@ -5,10 +5,9 @@
 変数宣言
 ****************************/
 int FreamTime;
-int NowTime;
-int Wait;
 int LastTime;
 float FreamRate;
+int FreamCount;
 
 /****************************
 フレーム制御機能：初期化処理
@@ -18,9 +17,8 @@ float FreamRate;
 void FreamControl_Initialize(void)
 {
 	FreamTime = ((int) 1000.0f / FREAM_RATE);
-	NowTime = 0;
-	Wait = 0;
-	LastTime = 0;
+	LastTime = GetNowCount();
+	FreamCount = 0;	
 }
 
 /****************************
@@ -30,14 +28,19 @@ void FreamControl_Initialize(void)
 ****************************/
 void FreamControl_Update(void)
 {
-	NowTime = GetNowCount();
-	Wait = FreamTime - (NowTime - LastTime);
-
-	if (Wait > 0)
+	if (FreamCount == FREAM_RATE)
 	{
-		WaitTimer(Wait);
+		FreamCount = 0;
+		LastTime = GetNowCount();
 	}
-	LastTime = GetNowCount();
+	FreamCount++;
+
+	int took = GetNowCount() - LastTime;
+	int wait = FreamCount * 1000 / 60 - took;
+	if (wait > 0)
+	{
+		WaitTimer(wait);
+	}
 }
 
 /****************************
@@ -45,7 +48,7 @@ void FreamControl_Update(void)
 引　数：なし
 戻り値：フレームタイム
 ****************************/
-int GetFreamTime(void)
+float GetFreamTime(void)
 {
-	return (float)NowTime - (float)LastTime;
+	return (float)(GetNowCount() - LastTime) / FreamCount;
 }

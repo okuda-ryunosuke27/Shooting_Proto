@@ -38,6 +38,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	{
 		//フレーム制御機能更新処理
 		FreamControl_Update();
+		//WaitTimer(20);
 		//入力の更新処理
 		Input_Updata();
 
@@ -50,6 +51,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		//プレイヤー更新処理
 		Player_Updata();
+
+		//エネミー更新処理
+		Enemy_Update();
 
 		//弾の描画
 		Bullet_Draw();
