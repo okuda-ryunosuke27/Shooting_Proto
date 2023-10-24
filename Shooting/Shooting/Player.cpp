@@ -5,6 +5,7 @@
 
 float PlayerX, PlayerY;
 int PlayerImage;
+int trigger = 0;	//ストレートか三方向かを決める 0はストレート
 
 void Player_Initialize(void)
 {
@@ -28,6 +29,16 @@ void Player_Updata(void)
 		PlayerX += 4.5f;
 	}
 
+	if (key()[KEY_INPUT_C] == 1)
+	{
+		trigger = 0;
+	}
+	else if (key()[KEY_INPUT_X] == 1)
+	{
+		trigger = 1;
+	}
+
+
 	//プレイヤーの弾打つ処理
 	if (key()[KEY_INPUT_SPACE] == 1)
 	{
@@ -40,4 +51,10 @@ void Player_Updata(void)
 void Player_Draw(void)
 {
 	DrawGraphF(PlayerX, PlayerY, PlayerImage, TRUE);
+}
+
+
+int GetTrigger(void)
+{
+	return trigger;
 }

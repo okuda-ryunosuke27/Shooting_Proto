@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Enemy.h"
 #include "FreamControl.h"
+#include "Player.h"
 
 
 //ストレートに進む弾と
@@ -28,17 +29,41 @@ void Bullet_Initialize(float& PlayerX, float& PlayerY)
 
 void Bullet_Updata(void)
 {
-	if (IsBulletFlag == 1)
+	if (GetTrigger() == 0)
 	{
-		BulletY -= 5.5;
-
-		if (BulletY < -20)
+		if (IsBulletFlag == 1)
 		{
-			IsBulletFlag = 0;
+			BulletY -= 5.5;
+
+			if (BulletY < -20)
+			{
+				IsBulletFlag = 0;
+			}
+		}
+	}
+	else if (GetTrigger() == 1)
+	{
+		if (IsBulletFlag == 1)
+		{
+
 		}
 	}
 }
 
+
+void Bullet_Draw(void)
+{
+	DrawCircleAA(BulletX, BulletY, BulletR, 15, 0xFFFFFF, TRUE);
+
+	DrawFormatString(0, 400, 0xffffff, "%.2f", BulletX);
+	DrawFormatString(70, 400, 0xffffff, "%.2f", BulletY);
+	DrawFormatString(140, 400, 0xffffff, "%.2f", GetFreamTime());
+}
+
+
+//古の誘導ミサイル
+//使うかどうか分からんけど
+//遺産としておいとく
 void Bullet_Homing()
 {
 	//弾を発射するプログラム
@@ -70,13 +95,4 @@ void Bullet_Homing()
 			IsBulletFlag = 0;
 		}
 	}
-}
-
-void Bullet_Draw(void)
-{
-	DrawCircleAA(BulletX, BulletY, BulletR, 15, 0xFFFFFF, TRUE);
-
-	DrawFormatString(0, 400, 0xffffff, "%.2f", BulletX);
-	DrawFormatString(70, 400, 0xffffff, "%.2f", BulletY);
-	DrawFormatString(140, 400, 0xffffff, "%.2f", GetFreamTime());
 }

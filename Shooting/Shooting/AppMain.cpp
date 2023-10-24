@@ -46,8 +46,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		ClearDrawScreen();
 
 		//弾の更新処理
-		//Bullet_Updata();
-		Bullet_Homing();
+		Bullet_Updata();
+		//Bullet_Homing();
 
 		//プレイヤー更新処理
 		Player_Updata();
