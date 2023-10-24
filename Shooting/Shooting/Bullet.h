@@ -4,12 +4,19 @@
 /****************************
 å^êÈåæ
 ****************************/
-typedef struct BulletStatus
+typedef struct Bullet
 {
 	float BulletX;
 	float BulletY;
 	float BulletR;
 	int IsBulletFlag;
+}BulletStatus;
+
+typedef enum BulletWay
+{
+	Straight,
+	Right,
+	Left,
 };
 
 

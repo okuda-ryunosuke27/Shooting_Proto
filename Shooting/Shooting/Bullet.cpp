@@ -11,19 +11,50 @@
 
 
 //グローバル変数宣言
-float BulletX = -10.0f, BulletY = -10.0f, BulletR = 10.0f; 
-int IsBulletFlag = 0;
 float verX = 0.0f, verY = 0.0f;
 float BulletSpX = 0.0f, BulletSpY = 0.0f;
 
+BulletStatus Bullet[3];
 
 void Bullet_Initialize(float& PlayerX, float& PlayerY)
 {
-	if (IsBulletFlag == 0)
+	/*StraightBullet.BulletX = -10.0f;
+	StraightBullet.BulletY = -10.0f;
+	StraightBullet.BulletR = 10.0f;
+	StraightBullet.IsBulletFlag = 0;*/
+
+	for (int i = 0; i < 3; i++)
 	{
-		BulletX = PlayerX + 15;
-		BulletY = PlayerY + 15;
-		IsBulletFlag = 1;
+		Bullet[i].BulletX = -10.f;
+		Bullet[i].BulletY = -10.f;
+		Bullet[i].BulletR = -10.f;
+		Bullet[i].IsBulletFlag = 0;
+	}
+
+	if (GetTrigger() == 0)
+	{
+		if (Bullet[Straight].IsBulletFlag == 0)
+		{
+			StraightBullet.BulletX = PlayerX + 15;
+			StraightBullet.BulletY = PlayerY + 15;
+			StraightBullet.IsBulletFlag = 1;
+		}
+	}
+	else
+	{
+		if (Bullet[Straight].IsBulletFlag == 0 && Bullet[Right].IsBulletFlag == 0 &&
+			Bullet[Left].IsBulletFlag == 0)
+		{
+			Bullet[Straight].BulletX = PlayerX + 15;
+			Bullet[Straight].BulletY = PlayerY + 15;
+			Bullet[Right].BulletX = PlayerX + 15;
+			Bullet[Right].BulletY = PlayerY + 15;
+			Bullet[Left].BulletX = PlayerX + 15;
+			Bullet[Left].BulletY = PlayerY + 15;
+			Bullet[Straight].IsBulletFlag = 1;
+			Bullet[Right].IsBulletFlag = 1;
+			Bullet[Left].IsBulletFlag = 1;
+		}
 	}
 }
 
@@ -31,21 +62,26 @@ void Bullet_Updata(void)
 {
 	if (GetTrigger() == 0)
 	{
-		if (IsBulletFlag == 1)
+		if (StraightBullet.IsBulletFlag == 1)
 		{
-			BulletY -= 5.5;
+			StraightBullet.BulletY -= 5.5;
 
-			if (BulletY < -20)
+			if (StraightBullet.BulletY < -20)
 			{
-				IsBulletFlag = 0;
+				StraightBullet.IsBulletFlag = 0;
 			}
 		}
 	}
-	else if (GetTrigger() == 1)
+	else
 	{
-		if (IsBulletFlag == 1)
+		if (StraightBullet.IsBulletFlag == 1)
 		{
+			StraightBullet.BulletX -= 5.5;
 
+			if (StraightBullet.BulletX < -20)
+			{
+				StraightBullet.IsBulletFlag = 0;
+			}
 		}
 	}
 }
@@ -53,11 +89,11 @@ void Bullet_Updata(void)
 
 void Bullet_Draw(void)
 {
-	DrawCircleAA(BulletX, BulletY, BulletR, 15, 0xFFFFFF, TRUE);
+	DrawCircleAA(StraightBullet.BulletX, StraightBullet.BulletY, StraightBullet.BulletR, 15, 0xFFFFFF, TRUE);
 
-	DrawFormatString(0, 400, 0xffffff, "%.2f", BulletX);
-	DrawFormatString(70, 400, 0xffffff, "%.2f", BulletY);
-	DrawFormatString(140, 400, 0xffffff, "%.2f", GetFreamTime());
+	DrawFormatString(0, 400, 0xffffff, "%.2f", StraightBullet.BulletX);
+	DrawFormatString(70, 400, 0xffffff, "%.2f", StraightBullet.BulletY);
+	DrawFormatString(140, 400, 0xffffff, "%.2f", GetTrigger());
 }
 
 
@@ -67,32 +103,32 @@ void Bullet_Draw(void)
 void Bullet_Homing()
 {
 	//弾を発射するプログラム
-	if (IsBulletFlag == 1)
+	if (StraightBullet.IsBulletFlag == 1)
 	{
-		if (BulletY > 30)
+		if (StraightBullet.BulletY > 30)
 		{
 			//ベクトルの計算、Xの座標
-			verX = GetEnemyX() - BulletX;
+			verX = GetEnemyX() - StraightBullet.BulletX;
 			//ベクトルの計算、Yの座標
-			verY = GetEnemyY() - BulletY;
+			verY = GetEnemyY() - StraightBullet.BulletY;
 		}
 		BulletSpX = verX / GetFreamTime();
 		BulletSpY = verY / GetFreamTime();
-		if (BulletY > 320)
+		if (StraightBullet.BulletY > 320)
 		{
-			BulletY -= 1.5f;
+			StraightBullet.BulletY -= 1.5f;
 		}
 		else 
 		{
-			BulletX -= -BulletSpX;
-			BulletY -= -BulletSpY;
+			StraightBullet.BulletX -= -BulletSpX;
+			StraightBullet.BulletY -= -BulletSpY;
 		}
 
-		if (BulletY < -20)
+		if (StraightBullet.BulletY < -20)
 		{
-			BulletX = -10.f;
-			BulletY = -10.f;
-			IsBulletFlag = 0;
+			StraightBullet.BulletX = -10.f;
+			StraightBullet.BulletY = -10.f;
+			StraightBullet.IsBulletFlag = 0;
 		}
 	}
 }
