@@ -32,13 +32,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	FreamControl_Initialize();
 	//プレイヤーの初期化
 	Player_Initialize();
+	//弾の初期化
+	Bullet_Initialize();
 
 	//ゲームループ
 	while (ProcessMessage()!=D_ERROR && Input_Escape() == FALSE)
 	{
 		//フレーム制御機能更新処理
 		FreamControl_Update();
-		//WaitTimer(20);
 		//入力の更新処理
 		Input_Updata();
 
@@ -47,7 +48,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		//弾の更新処理
 		Bullet_Updata();
-		//Bullet_Homing();
 
 		//プレイヤー更新処理
 		Player_Updata();

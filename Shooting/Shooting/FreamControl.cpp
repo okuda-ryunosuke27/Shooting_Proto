@@ -46,9 +46,9 @@ void FreamControl_Update(void)
 /****************************
 フレーム制御機能：フレームレートを取得する
 引　数：なし
-戻り値：フレームタイム
+戻り値：フレームレート
 ****************************/
-float GetFreamTime(void)
+float GetFreamRate(void)
 {
 	return (float)(GetNowCount() - LastTime) / FreamCount;
 }

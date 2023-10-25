@@ -10,4 +10,4 @@
 void FreamControl_Initialize(void);
 void FreamControl_Update(void);
 
-float GetFreamTime(void);
+float GetFreamRate(void);
