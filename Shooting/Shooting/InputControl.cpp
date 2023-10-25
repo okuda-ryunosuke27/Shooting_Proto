@@ -45,3 +45,8 @@ char* key(void)
 {
 	return keys;
 }
+
+char* oldkey(void)
+{
+	return oldkeys;
+}

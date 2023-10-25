@@ -10,4 +10,4 @@ void Player_Initialize(void);
 void Player_Updata(void);
 void Player_Draw(void);
 
-int GetTrigger(void);
+int ChangeStatus(void);

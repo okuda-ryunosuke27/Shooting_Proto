@@ -29,18 +29,18 @@ void Player_Updata(void)
 		PlayerX += 4.5f;
 	}
 
-	if (key()[KEY_INPUT_C] == 1)
+	if (key()[KEY_INPUT_C] == 1 && GetBulletFlag() == 0)
 	{
 		trigger = 0;
 	}
-	else if (key()[KEY_INPUT_X] == 1)
+	else if (key()[KEY_INPUT_X] == 1 && GetBulletFlag() == 0)
 	{
 		trigger = 1;
 	}
 
 
 	//ÉvÉåÉCÉÑÅ[ÇÃíeë≈Ç¬èàóù
-	if (key()[KEY_INPUT_SPACE] == 1)
+	if (key()[KEY_INPUT_SPACE] == 1 && GetBulletFlag() == 0)
 	{
 		Bullet_Initialize(PlayerX, PlayerY);
 	}
@@ -54,7 +54,7 @@ void Player_Draw(void)
 }
 
 
-int GetTrigger(void)
+int ChangeStatus(void)
 {
 	return trigger;
 }
