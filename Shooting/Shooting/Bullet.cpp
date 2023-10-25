@@ -4,25 +4,17 @@
 #include "FreamControl.h"
 #include "Player.h"
 
-
-//ストレートに進む弾と
-//ホーミングして進む弾と
-//三つの方向に進む弾を作る
-
-
-//グローバル変数宣言
-float verX = 0.0f, verY = 0.0f;
-float BulletSpX = 0.0f, BulletSpY = 0.0f;
-
+/****************************
+* グローバル変数宣言
+****************************/
 BulletStatus Bullet[3];
 
+
+/****************************
+
+****************************/
 void Bullet_Initialize(float& PlayerX, float& PlayerY)
 {
-	/*StraightBullet.BulletX = -10.0f;
-	StraightBullet.BulletY = -10.0f;
-	StraightBullet.BulletR = 10.0f;
-	StraightBullet.IsBulletFlag = 0;*/
-
 	for (int i = 0; i < 3; i++)
 	{
 		Bullet[i].BulletX = -10.f;
@@ -61,34 +53,34 @@ void Bullet_Initialize(float& PlayerX, float& PlayerY)
 void Bullet_Updata(void)
 {
 	
-		if (Bullet[Straight].IsBulletFlag == 1)
+	if (Bullet[Straight].IsBulletFlag == 1)
+	{
+		if (ChangeStatus() == 0)
 		{
-			if (ChangeStatus() == 0)
-			{
-				Bullet[Straight].BulletY -= 5.5;
+			Bullet[Straight].BulletY -= 5.5;
 
-				if (Bullet[Straight].BulletY < -20)
-				{
-					Bullet[Straight].IsBulletFlag = 0;
-				}
-			}
-			else
+			if (Bullet[Straight].BulletY < -20)
 			{
-				Bullet[Straight].BulletY -= 5.5f;
-				Bullet[Right].BulletX += 5.f;
-				Bullet[Right].BulletY -= 5.f;
-				Bullet[Left].BulletX -= 5.f;
-				Bullet[Left].BulletY -= 5.f;
-
-				if (Bullet[Straight].BulletY < -20 && Bullet[Right].BulletY < -20 
-					&& Bullet[Left].BulletY < -20)
-				{
-					Bullet[Straight].IsBulletFlag = 0;
-					Bullet[Right].IsBulletFlag = 0;
-					Bullet[Left].IsBulletFlag = 0;
-				}
+				Bullet[Straight].IsBulletFlag = 0;
 			}
 		}
+		else
+		{
+			Bullet[Straight].BulletY -= 5.5f;
+			Bullet[Right].BulletX += 5.f;
+			Bullet[Right].BulletY -= 5.f;
+			Bullet[Left].BulletX -= 5.f;
+			Bullet[Left].BulletY -= 5.f;
+
+			if (Bullet[Straight].BulletY < -20 && Bullet[Right].BulletY < -20 
+				&& Bullet[Left].BulletY < -20)
+			{
+				Bullet[Straight].IsBulletFlag = 0;
+				Bullet[Right].IsBulletFlag = 0;
+				Bullet[Left].IsBulletFlag = 0;
+			}
+		}
+	}
 }
 
 
