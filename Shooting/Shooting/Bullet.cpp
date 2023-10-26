@@ -29,7 +29,7 @@ void Bullet_Initialize(void)
 
 /****************************
 弾の制御機能：弾の生成処理
-引　数：なし
+引　数：プレイヤーの座標取得( x, y)
 戻り値：なし
 ****************************/
 void Bullet_Create(float& PlayerX, float& PlayerY)
@@ -90,10 +90,11 @@ void Bullet_Updata(void)
 		}
 		else
 		{
+			//三方向の弾の移動の計算
 			Bullet[Straight].BulletY -= 5.5f;
-			Bullet[Right].BulletX += 5.f;
+			Bullet[Right].BulletX += 3.5f;
 			Bullet[Right].BulletY -= 5.f;
-			Bullet[Left].BulletX -= 5.f;
+			Bullet[Left].BulletX -= 3.5f;
 			Bullet[Left].BulletY -= 5.f;
 
 			//弾たちが -20に行ったら弾たちのフラグを0にする。

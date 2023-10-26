@@ -1,11 +1,19 @@
 #include "Enemy.h"
 #include "DxLib.h"
 
+/****************************
+マクロ定義
+****************************/
 #define ENEMYSIZE	(32)
 
-float EnemyX = 300.0f,
-float EnemyY = 10.0f, EnemyR = 18.0f, EnemySpeed = 2.0f;
-int IsEnemyAlive = 1;
+/****************************
+変数宣言
+****************************/
+float EnemyX;
+float EnemyY;
+float EnemyR; 
+float EnemySpeed;
+int IsEnemyAlive;
 
 /****************************
 敵制御処理：敵の更新処理
@@ -17,6 +25,8 @@ void Enemy_Initialize(void)
 	EnemyX = 300.f;
 	EnemyY = 10.f;
 	EnemyR = 18.f;
+	EnemySpeed = 2.f;
+	IsEnemyAlive = 1;
 }
 
 /****************************

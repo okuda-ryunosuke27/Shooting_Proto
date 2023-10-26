@@ -30,10 +30,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	//フレームレートの初期化
 	FreamControl_Initialize();
-	//プレイヤーの初期化
+	//自機の初期化
 	Player_Initialize();
 	//弾の初期化
 	Bullet_Initialize();
+	//敵の初期化
+	Enemy_Initialize();
 
 	//ゲームループ
 	while (ProcessMessage()!=D_ERROR && Input_Escape() == FALSE)
