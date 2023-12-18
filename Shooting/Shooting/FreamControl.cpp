@@ -6,7 +6,6 @@
 ****************************/
 int FreamTime;
 int LastTime;
-float FreamRate;
 int FreamCount;
 
 /****************************
